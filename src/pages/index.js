@@ -14,7 +14,7 @@ const IndexPage = () => (
     <Row>
       <Col md="8">
         <StaticQuery
-          query={IndexQuery}
+          query={indexQuery}
           render={data => {
             return (
               <div>
@@ -24,6 +24,7 @@ const IndexPage = () => (
                     author={node.frontmatter.author}
                     path={node.frontmatter.path}
                     date={node.frontmatter.date}
+                    tags={node.frontmatter.tags}
                     body={node.excerpt}
                     fluid={node.frontmatter.image.childImageSharp.fluid}
                   />
@@ -46,16 +47,21 @@ const IndexPage = () => (
   </Layout>
 )
 
-const IndexQuery = graphql`
-  query {
-    allMarkdownRemark(sort: { fields: frontmatter___date, order: DESC }) {
+const indexQuery = graphql`
+  query indexQuery {
+    allMarkdownRemark(
+      sort: { fields: [frontmatter___date], order: DESC }
+      limit: 2
+    ) {
+      totalCount
       edges {
         node {
+          id
           frontmatter {
-            author
-            date(formatString: "MMM Do YYYY")
-            path
             title
+            date(formatString: "MMM Do YYYY")
+            author
+            tags
             image {
               childImageSharp {
                 fluid(maxWidth: 600) {
