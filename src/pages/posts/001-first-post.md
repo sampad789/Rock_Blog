@@ -2,7 +2,6 @@
 title: "Clapton tour cancelled"
 date: 2020-01-01 08:00:00
 author: "John Legend"
-path: "/first-post"
 image: ../../images/firstpostImage.jpg
 tags: ["Music", "Rock", "Clapton", " Concert"]
 ---
