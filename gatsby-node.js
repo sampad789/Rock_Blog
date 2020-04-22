@@ -1,5 +1,6 @@
 const { slugify } = require("./src/util/utilityFunctions")
 const path = require("path")
+const authors = require("./src/util/authors")
 exports.onCreateNode = ({ node, actions }) => {
   const { createNodeField } = actions
   if (node.internal.type === "MarkdownRemark") {
@@ -42,6 +43,9 @@ exports.createPages = ({ actions, graphql }) => {
         context: {
           //Passing slug for the tremplate to get a single post
           slug: node.fields.slug,
+          // Find author imageurl from author and pass it to the single Post template
+          imageUrl: authors.find(x => x.name === node.frontmatter.author)
+            .imageUrl,
         },
       })
     })
