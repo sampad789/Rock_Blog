@@ -3,43 +3,32 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { graphql, StaticQuery } from "gatsby"
 import Post from "../components/Post"
-import Sidebar from "../components/Sidebar"
 
-import { Row, Col } from "reactstrap"
 const IndexPage = () => (
-  <Layout>
+  <Layout pageTitle="RockBlog">
     <SEO title="Home" />
-    <h1>
-      Every time you pick up your guitar to play, play as if it's the last time.
-    </h1>
-    <Row>
-      <Col md="8">
-        <StaticQuery
-          query={indexQuery}
-          render={data => {
-            return (
-              <div>
-                {data.allMarkdownRemark.edges.map(({ node }) => (
-                  <Post
-                    key={node.id}
-                    title={node.frontmatter.title}
-                    author={node.frontmatter.author}
-                    date={node.frontmatter.date}
-                    tags={node.frontmatter.tags}
-                    body={node.excerpt}
-                    fluid={node.frontmatter.image.childImageSharp.fluid}
-                    slug={node.fields.slug}
-                  />
-                ))}
-              </div>
-            )
-          }}
-        />
-      </Col>
-      <Col md="4">
-        <Sidebar />
-      </Col>
-    </Row>
+
+    <StaticQuery
+      query={indexQuery}
+      render={data => {
+        return (
+          <div>
+            {data.allMarkdownRemark.edges.map(({ node }) => (
+              <Post
+                key={node.id}
+                title={node.frontmatter.title}
+                author={node.frontmatter.author}
+                date={node.frontmatter.date}
+                tags={node.frontmatter.tags}
+                body={node.excerpt}
+                fluid={node.frontmatter.image.childImageSharp.fluid}
+                slug={node.fields.slug}
+              />
+            ))}
+          </div>
+        )
+      }}
+    />
   </Layout>
 )
 
