@@ -13,7 +13,7 @@ const TeamPage = () => (
       <Row className="mb-4">
         <div className="col-md-4" key={i}>
           <img
-            src={authors.staticImage}
+            src={require(`../images/${authors.imageUrl}`)}
             style={{ maxWidth: "100%", minHeight: "25%" }}
             alt="Author Profile"
           />
